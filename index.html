@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Pro – Modern Library Management System</title>
+  <meta name="description" content="A modern, responsive Library Management System inspired by Library Pro dashboard design.">
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="outer-viewport">
+    <div class="app-frame">
+      
+      <!-- ============================================== -->
+      <!-- SIDEBAR (PURPLE THEME MATCHING DESIGN)         -->
+      <!-- ============================================== -->
+      <aside class="sidebar" id="sidebar">
+        
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+          <div class="brand-logo">
+            <div class="brand-cube-icon">
+              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2L26 8.5V20.5L14 27L2 20.5V8.5L14 2Z" fill="#F472B6"/>
+                <path d="M14 2L26 8.5L14 15.5L2 8.5L14 2Z" fill="#FBCFE8"/>
+                <path d="M14 15.5V27L2 20.5V8.5L14 15.5Z" fill="#EC4899"/>
+                <path d="M26 8.5V20.5L14 27V15.5L26 8.5Z" fill="#DB2777"/>
+              </svg>
+            </div>
+            <span class="brand-title">Library Pro</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav">
+          <ul class="nav-list">
+            
+            <!-- Dashboard (Active by default, white pill with arrow button) -->
+            <li class="nav-item">
+              <a href="#dashboard" class="nav-link active" data-view="dashboard">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                  </svg>
+                  <span>Dashboard</span>
+                </div>
+                <div class="nav-link-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
+              </a>
+            </li>
+
+            <!-- Add New Book -->
+            <li class="nav-item">
+              <a href="#add-book" class="nav-link" data-view="add-book">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                  <span>Add Book</span>
+                </div>
+              </a>
+            </li>
+
+            <!-- Books Available (All Books) -->
+            <li class="nav-item">
+              <a href="#all-books" class="nav-link" data-view="all-books">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    <line x1="9" y1="7" x2="15" y2="7"></line>
+                    <line x1="9" y1="11" x2="13" y2="11"></line>
+                  </svg>
+                  <span>Books Available</span>
+                </div>
+                <span class="nav-counter" id="navTotalBooksBadge">0</span>
+              </a>
+            </li>
+
+            <!-- Book Issued / Return (Circulation / Issued) -->
+            <li class="nav-item">
+              <a href="#issued-books" class="nav-link" data-view="issued-books">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                  </svg>
+                  <span>Book Issued/Return</span>
+                </div>
+                <span class="nav-counter badge-alert" id="navIssuedBooksBadge">0</span>
+              </a>
+            </li>
+
+            <!-- Search Books -->
+            <li class="nav-item">
+              <a href="#search-books" class="nav-link" data-view="search-books">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>Search Books</span>
+                </div>
+              </a>
+            </li>
+
+            <!-- Issue Book Form -->
+            <li class="nav-item">
+              <a href="#issue-book" class="nav-link" data-view="issue-book">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <polyline points="17 11 19 13 23 9"></polyline>
+                  </svg>
+                  <span>Issue Book</span>
+                </div>
+              </a>
+            </li>
+
+            <!-- Return Book Form -->
+            <li class="nav-item">
+              <a href="#return-book" class="nav-link" data-view="return-book">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                  </svg>
+                  <span>Return Book</span>
+                </div>
+              </a>
+            </li>
+
+            <!-- Instructions & Warnings Policy Center -->
+            <li class="nav-item">
+              <a href="#dashboard" class="nav-link" onclick="window.navigateTo('dashboard'); window.switchPolicyCategory('warnings'); return false;">
+                <div class="nav-link-left">
+                  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  </svg>
+                  <span>Rules &amp; Warnings</span>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- 3D Rocket Upgrade Promotional Box (Exact match from design) -->
+        <div class="sidebar-promo-container">
+          <div class="rocket-floating-graphic">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Clouds -->
+              <ellipse cx="35" cy="98" rx="22" ry="12" fill="#E9D5FF" opacity="0.9"/>
+              <ellipse cx="60" cy="102" rx="26" ry="14" fill="#FFFFFF"/>
+              <ellipse cx="88" cy="98" rx="20" ry="12" fill="#E9D5FF" opacity="0.9"/>
+              <!-- Flame / Exhaust -->
+              <path d="M53 76C53 76 60 96 60 96C60 96 67 76 67 76Z" fill="#FBBF24"/>
+              <path d="M56 76C56 76 60 88 60 88C60 88 64 76 64 76Z" fill="#EF4444"/>
+              <!-- Rocket Wings -->
+              <path d="M42 66L32 78L45 74Z" fill="#EC4899"/>
+              <path d="M78 66L88 78L75 74Z" fill="#EC4899"/>
+              <!-- Rocket Body -->
+              <ellipse cx="60" cy="52" rx="16" ry="26" fill="#FFFFFF"/>
+              <path d="M60 26C51 34 46 48 46 58H74C74 48 69 34 60 26Z" fill="#F3F4F6"/>
+              <!-- Rocket Nose Cone -->
+              <path d="M60 26C55 31 52 40 52 42H68C68 40 65 31 60 26Z" fill="#EC4899"/>
+              <!-- Rocket Window -->
+              <circle cx="60" cy="50" r="7" fill="#60A5FA"/>
+              <circle cx="60" cy="50" r="5" fill="#3B82F6"/>
+              <circle cx="58" cy="48" r="2" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <div class="sidebar-promo-card">
+            <h4>Want to upgrade</h4>
+            <button class="btn-upgrade-pill" onclick="window.showToast('You are on Library Pro Premium Academic Tier!', 'info')">
+              Upgrade now
+            </button>
+          </div>
+        </div>
+
+        <!-- User Profile Card at bottom (Vanshika Pandey / HR Manager) -->
+        <div class="sidebar-user-footer">
+          <div class="user-info-row">
+            <img class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" alt="Vanshika Pandey">
+            <div class="user-meta">
+              <span class="user-name">Vanshika Pandey</span>
+              <span class="user-role">HR Manager</span>
+            </div>
+          </div>
+          <button class="btn-logout-pill" id="btnSidebarLogout" title="System Options / Reset Data">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+          </button>
+        </div>
+
+      </aside>
+
+      <!-- Sidebar Backdrop on Mobile -->
+      <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+      <!-- ============================================== -->
+      <!-- MAIN WORKSPACE CONTENT                         -->
+      <!-- ============================================== -->
+      <div class="main-workspace">
+        
+        <!-- Topbar Controls (Date Range, Search, User Avatar) -->
+        <header class="top-nav-bar">
+          <div class="topbar-left-controls">
+            <button class="hamburger-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <!-- Replaced Date Pill with Policy & Status Badge -->
+            <div class="library-policy-quick-tag" id="quickCategoryPill" onclick="window.switchPolicyCategory('warnings')">
+              <span class="live-dot-pulse"></span>
+              <span class="tag-title">Policy & Notice Center</span>
+            </div>
+          </div>
+
+          <div class="topbar-center-search">
+            <div class="global-search-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="topbarGlobalSearch" placeholder="Search books, student IDs, authors...">
+            </div>
+          </div>
+
+          <div class="topbar-right-profile">
+            <img class="profile-thumb" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Saiba Sen">
+          </div>
+        </header>
+
+        <!-- Inner Content Scroll Body -->
+        <div class="workspace-body">
+          
+          <!-- ============================================== -->
+          <!-- VIEW 1: DASHBOARD (EXACT IMAGE REPLICA)        -->
+          <!-- ============================================== -->
+          <section class="view-panel active" id="view-dashboard">
+            
+            <!-- Welcome Header Row with Sorting & Filter Buttons -->
+            <div class="welcome-header-row">
+              <div class="welcome-text-box">
+                <h1 class="welcome-title">Welcome Saiba Sen ! <span class="wave-emoji">👋</span></h1>
+                <p class="welcome-subtitle">A new book can added to your library . <a href="#add-book" onclick="window.navigateTo('add-book'); return false;" class="link-learn-more">Learn More</a></p>
+              </div>
+              <div class="header-action-pills category-header-pills">
+                <button class="pill-category-btn active" id="btnCatInstructions" onclick="window.switchPolicyCategory('instructions')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                  <span>Instructions</span>
+                </button>
+                <button class="pill-category-btn" id="btnCatGuidelines" onclick="window.switchPolicyCategory('guidelines')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Guidelines</span>
+                </button>
+                <button class="pill-category-btn pill-warning-accent" id="btnCatWarnings" onclick="window.switchPolicyCategory('warnings')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  <span>Warnings &amp; Lost Policy</span>
+                  <span class="warning-pulse-dot"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4 Metrics Cards Row (Exact Match from Design) -->
+            <div class="metrics-cards-row">
+              
+              <!-- Card 1: Total Students / Registered Titles -->
+              <div class="metric-card">
+                <div class="metric-top-row">
+                  <div class="metric-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                  <span class="metric-trend trend-green">+2.5%</span>
+                </div>
+                <div class="metric-meta">
+                  <span class="metric-label">Total Students</span>
+                  <h2 class="metric-value" id="statTotalBooks">2,589</h2>
+                </div>
+              </div>
+
+              <!-- Card 2: Books available -->
+              <div class="metric-card">
+                <div class="metric-top-row">
+                  <div class="metric-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  </div>
+                  <span class="metric-trend trend-green">+2.5%</span>
+                </div>
+                <div class="metric-meta">
+                  <span class="metric-label">Books available</span>
+                  <h2 class="metric-value" id="statAvailableCopies">22,589</h2>
+                </div>
+              </div>
+
+              <!-- Card 3: Book Issued -->
+              <div class="metric-card">
+                <div class="metric-top-row">
+                  <div class="metric-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z"/>
+                    </svg>
+                  </div>
+                  <span class="metric-trend trend-red">-2.5%</span>
+                </div>
+                <div class="metric-meta">
+                  <span class="metric-label">Book Issued</span>
+                  <h2 class="metric-value" id="statCurrentlyIssued">15</h2>
+                </div>
+              </div>
+
+              <!-- Card 4: Book due for Return -->
+              <div class="metric-card">
+                <div class="metric-top-row">
+                  <div class="metric-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  </div>
+                  <span class="metric-trend trend-green">+2.5%</span>
+                </div>
+                <div class="metric-meta">
+                  <span class="metric-label">Book due for Return</span>
+                  <h2 class="metric-value" id="statTotalCopies">250</h2>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ============================================== -->
+            <!-- CATEGORIES: INSTRUCTIONS, GUIDELINES, WARNINGS -->
+            <!-- ============================================== -->
+            <div class="white-box-card category-policy-hub" id="policyNoticeCard">
+              <div class="box-card-header policy-hub-header">
+                <div class="policy-hub-title-group">
+                  <div class="policy-icon-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                  </div>
+                  <div>
+                    <h3 class="box-title">Library Policy, Guidelines &amp; Warning Notices</h3>
+                    <p class="box-subtitle">Mandatory operational rules, circulation conduct, and overdue / lost book penalties</p>
+                  </div>
+                </div>
+
+                <div class="category-segmented-control">
+                  <button class="seg-btn active" id="segBtnInstructions" onclick="window.switchPolicyCategory('instructions')">
+                    <span>Instructions</span>
+                  </button>
+                  <button class="seg-btn" id="segBtnGuidelines" onclick="window.switchPolicyCategory('guidelines')">
+                    <span>Guidelines</span>
+                  </button>
+                  <button class="seg-btn seg-warning" id="segBtnWarnings" onclick="window.switchPolicyCategory('warnings')">
+                    <span>Warnings &amp; Penalties</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- PANE 1: INSTRUCTIONS -->
+              <div class="policy-pane active" id="pane-instructions">
+                <div class="policy-cards-grid">
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-purple">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>How to Borrow (Issue) a Book</h4>
+                      <p>Check book availability in the <strong>All Books</strong> catalog. Present your valid Student ID card at circulation desk or submit through the <strong>Issue Book</strong> portal. Available stock reduces automatically.</p>
+                      <span class="policy-tag-pill">Standard Loan: 14 Calendar Days</span>
+                    </div>
+                  </div>
+
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-green">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>How to Return a Book</h4>
+                      <p>Return the book on or before the due date at the counter or use the 1-click <strong>Return Book</strong> action. The librarian verifies the physical copy condition and the record is closed with restock.</p>
+                      <span class="policy-tag-pill tag-green">Instant Restock &amp; Receipt</span>
+                    </div>
+                  </div>
+
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-blue">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>Renewals &amp; Search Directory</h4>
+                      <p>Titles without waiting reservations can be renewed once for an additional <strong>7 days</strong>. Use the live <strong>Search Books</strong> bar to track availability and currently holding student IDs.</p>
+                      <span class="policy-tag-pill tag-blue">1 Renewal Allowed</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANE 2: GUIDELINES -->
+              <div class="policy-pane" id="pane-guidelines">
+                <div class="policy-cards-grid">
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-purple">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>Borrowing Quotas &amp; Limits</h4>
+                      <p>Undergraduate students can borrow a maximum of <strong>3 books concurrently</strong>. Postgraduate students &amp; researchers may borrow up to <strong>5 books</strong>. Reference books are strictly for reading room use.</p>
+                      <span class="policy-tag-pill">Max 3 to 5 Books per Student</span>
+                    </div>
+                  </div>
+
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-green">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>Material Care &amp; Preservation</h4>
+                      <p>No underlining, writing, highlighting, folding pages, or removing accession barcodes. Protect books from water, food, and extreme temperatures. Inspect books upon borrowing and report defects.</p>
+                      <span class="policy-tag-pill tag-green">Zero Defacement Policy</span>
+                    </div>
+                  </div>
+
+                  <div class="policy-item-card">
+                    <div class="policy-card-icon icon-blue">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="policy-card-text">
+                      <h4>Non-Transferable Cards</h4>
+                      <p>Your library access and borrowing account are strictly personal. Lending your card to another student or borrowing on someone else's credentials will result in disciplinary action.</p>
+                      <span class="policy-tag-pill tag-blue">Institutional ID Mandatory</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANE 3: WARNINGS ABOUT DELAYED RETURNS OR LOSING A BOOK -->
+              <div class="policy-pane" id="pane-warnings">
+                <div class="warnings-banner-box">
+                  <div class="warning-alert-strip">
+                    <div class="warning-alert-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </div>
+                    <div class="warning-alert-content">
+                      <h4>Strict Notice on Overdue Returns &amp; Lost Library Materials</h4>
+                      <p>Institutional policies require all borrowed resources to be returned timely to ensure equitable access. Penalties for overdue returns and lost books are enforced systematically.</p>
+                    </div>
+                  </div>
+
+                  <div class="warnings-split-grid">
+                    <!-- Warning Item 1: Delayed Returns -->
+                    <div class="warning-detail-card overdue-card">
+                      <div class="warning-card-header">
+                        <span class="warning-badge-pill">DELAYED RETURNS</span>
+                        <h4>Overdue Fine &amp; Privilege Suspension</h4>
+                      </div>
+                      <ul class="warning-points-list">
+                        <li>
+                          <strong>Daily Overdue Fine:</strong>
+                          <span>A fine of <strong>₹10.00 / $1.00 per day</strong> per book is charged starting immediately after the 1-day grace period.</span>
+                        </li>
+                        <li>
+                          <strong>Extended Overdue (> 14 Days):</strong>
+                          <span>Daily fine escalates to <strong>₹25.00 / $2.50 per day</strong>. Your library account is automatically locked, suspending all borrowing privileges until dues are settled.</span>
+                        </li>
+                        <li>
+                          <strong>Academic Escalation:</strong>
+                          <span>Overdue loans exceeding 30 days are reported directly to the Academic Counselor and Department Head for semester clearance stoppage.</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Warning Item 2: Lost or Damaged Book -->
+                    <div class="warning-detail-card lost-card">
+                      <div class="warning-card-header">
+                        <span class="warning-badge-pill pill-red">LOST OR DAMAGED BOOKS</span>
+                        <h4>Replacement Charges &amp; Degree Clearance Hold</h4>
+                      </div>
+                      <ul class="warning-points-list">
+                        <li>
+                          <strong>Mandatory Immediate Notice:</strong>
+                          <span>Report misplaced or lost books immediately to the librarian to freeze accruing daily overdue fines.</span>
+                        </li>
+                        <li>
+                          <strong>Replacement Liability:</strong>
+                          <span>The student must provide an identical, brand-new replacement copy (same ISBN &amp; edition) plus a ₹100 / $5.00 cataloging fee OR pay <strong>150% of the current market retail price</strong>.</span>
+                        </li>
+                        <li>
+                          <strong>Clearance Withheld ("No Dues" Hold):</strong>
+                          <span>Failure to replace a lost book blocks examination admit cards, grade transcript release, and the issuance of college transfer / degree certificates.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Middle Section: Fees Pending & Student Profile (Side-by-Side) -->
+            <div class="middle-cards-grid">
+              
+              <!-- Left: Fees Pending (Quick Circulation / Pending Dues) -->
+              <div class="white-box-card">
+                <div class="box-card-header">
+                  <h3 class="box-title">Fees Pending</h3>
+                  <a href="#issued-books" onclick="window.navigateTo('issued-books'); return false;" class="link-view-all">View All</a>
+                </div>
+                <div class="table-responsive">
+                  <table class="pro-table">
+                    <thead>
+                      <tr>
+                        <th>Students</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Invoice</th>
+                      </tr>
+                    </thead>
+                    <tbody id="feesPendingTableBody">
+                      <!-- Populated dynamically via script.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Right: Student Profile -->
+              <div class="white-box-card">
+                <div class="box-card-header">
+                  <h3 class="box-title">Student Profile</h3>
+                  <a href="#all-books" onclick="window.navigateTo('all-books'); return false;" class="link-view-all">View All</a>
+                </div>
+                <div class="table-responsive">
+                  <table class="pro-table">
+                    <thead>
+                      <tr>
+                        <th>Students</th>
+                        <th>Class</th>
+                        <th>D.O.J</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="studentProfileTableBody">
+                      <!-- Populated dynamically via script.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Section: Book Issued / Returned & Wishlist -->
+            <div class="bottom-cards-grid">
+              
+              <!-- Left / Main: Book Issued /Returned (Task 6 Integration) -->
+              <div class="white-box-card issued-returned-card">
+                <div class="box-card-header">
+                  <h3 class="box-title">Book Issued /Returned</h3>
+                  <a href="#issued-books" onclick="window.navigateTo('issued-books'); return false;" class="link-view-all">View All</a>
+                </div>
+                <div class="table-responsive">
+                  <table class="pro-table" id="dashboardIssuedReturnedTable">
+                    <thead>
+                      <tr>
+                        <th>Sno.</th>
+                        <th>Student name</th>
+                        <th>Book name</th>
+                        <th>Issued date</th>
+                        <th>Return date</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashboardIssuedReturnedBody">
+                      <!-- Populated dynamically via script.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Right: Wishlist / Featured Books (Exact Graphic & Covers from Design) -->
+              <div class="white-box-card wishlist-card">
+                <div class="wishlist-header-action">
+                  <button class="btn-wishlist-pill" onclick="window.navigateTo('all-books')">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                    <span>Wishlist</span>
+                  </button>
+                </div>
+                <div class="wishlist-books-list">
+                  
+                  <!-- Book 1: Don't Make Me Think -->
+                  <div class="wishlist-book-item" onclick="window.quickSearchFor('Clean Code')">
+                    <div class="book-cover-thumb cover-yellow">
+                      <div class="cover-inner-text">
+                        <span class="cover-author">Steve Krug</span>
+                        <span class="cover-big">DON'T<br>MAKE<br>ME<br>THINK</span>
+                      </div>
+                    </div>
+                    <div class="book-item-meta">
+                      <h4>Don't Make Me Think</h4>
+                      <p>Steve Krug, 2000</p>
+                    </div>
+                  </div>
+
+                  <!-- Book 2: The Design of Everyday Things -->
+                  <div class="wishlist-book-item" onclick="window.quickSearchFor('Design Patterns')">
+                    <div class="book-cover-thumb cover-white">
+                      <div class="cover-inner-text">
+                        <span class="cover-author">Don Norman</span>
+                        <span class="cover-big">THE DESIGN<br>OF EVERYDAY<br>THINGS</span>
+                      </div>
+                    </div>
+                    <div class="book-item-meta">
+                      <h4>The Design of EveryDay Things</h4>
+                      <p>Don Norman, 1988</p>
+                    </div>
+                  </div>
+
+                  <!-- Book 3: Rich Dad Poor Dad -->
+                  <div class="wishlist-book-item" onclick="window.quickSearchFor('Algorithms')">
+                    <div class="book-cover-thumb cover-purple">
+                      <div class="cover-inner-text">
+                        <span class="cover-author">Robert T. Kiyosaki</span>
+                        <span class="cover-big">RICH<br>DAD<br>POOR DAD</span>
+                      </div>
+                    </div>
+                    <div class="book-item-meta">
+                      <h4>Rich Dad Poor Dad</h4>
+                      <p>Robert T. Kiyosaki, 1997</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 2: ADD NEW BOOK (Task 1)                  -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-add-book">
+            <div class="section-card-panel">
+              <div class="panel-header-bar">
+                <div>
+                  <h2 class="panel-title">Add New Book to Collection</h2>
+                  <p class="panel-subtitle">Enter catalog metadata to register a new book into the library system</p>
+                </div>
+                <button class="pill-dropdown-btn" onclick="window.navigateTo('all-books')">View Catalog</button>
+              </div>
+
+              <div class="form-two-column-layout">
+                <!-- Add Form -->
+                <form id="addBookForm" class="pro-styled-form" novalidate>
+                  <div class="form-grid-row">
+                    <div class="form-group-item">
+                      <label for="addBookId" class="pro-label required">Book ID</label>
+                      <input type="text" id="addBookId" class="pro-input" placeholder="e.g. BK-106, CS-201" required>
+                      <span class="pro-hint">Unique identifier for this title. Duplicate IDs are rejected.</span>
+                    </div>
+                    <div class="form-group-item">
+                      <label for="addBookYear" class="pro-label required">Publication Year</label>
+                      <input type="number" id="addBookYear" class="pro-input" placeholder="e.g. 2023" min="1000" max="2099" required>
+                      <span class="pro-hint">Valid 4-digit publication year.</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group-item">
+                    <label for="addBookTitle" class="pro-label required">Book Title</label>
+                    <input type="text" id="addBookTitle" class="pro-input" placeholder="e.g. Clean Architecture: A Craftsman's Guide" required>
+                  </div>
+
+                  <div class="form-group-item">
+                    <label for="addBookAuthor" class="pro-label required">Author Name</label>
+                    <input type="text" id="addBookAuthor" class="pro-input" placeholder="e.g. Robert C. Martin" required>
+                  </div>
+
+                  <div class="form-group-item">
+                    <label for="addBookCopies" class="pro-label required">Available Copies</label>
+                    <input type="number" id="addBookCopies" class="pro-input" placeholder="e.g. 5" min="1" max="1000" value="1" required>
+                    <span class="pro-hint">Number of physical copies to add to stock (minimum 1).</span>
+                  </div>
+
+                  <div class="form-btn-actions">
+                    <button type="submit" class="btn-purple-primary" id="btnSubmitAddBook">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      Add Book to Library
+                    </button>
+                    <button type="reset" class="btn-outline-pill">Clear Form</button>
+                  </div>
+                </form>
+
+                <!-- Helpful Guide Card -->
+                <div class="guidelines-card">
+                  <h3>Cataloging Rules</h3>
+                  <div class="guide-step">
+                    <span class="step-num">1</span>
+                    <div>
+                      <strong>Duplicate ID Guard</strong>
+                      <p>Every book identifier must be unique in the system database.</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">2</span>
+                    <div>
+                      <strong>Integrity Validation</strong>
+                      <p>Blank titles, authors, or invalid years are automatically rejected with clear error feedback.</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">3</span>
+                    <div>
+                      <strong>Automatic Dashboard Sync</strong>
+                      <p>Total Books and Available Copies counts update immediately upon saving.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 3: ALL BOOKS (Task 2)                     -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-all-books">
+            <div class="section-card-panel">
+              <div class="panel-header-bar">
+                <div>
+                  <h2 class="panel-title">All Books Directory</h2>
+                  <p class="panel-subtitle">Comprehensive list of cataloged books with live stock and quick actions</p>
+                </div>
+                
+                <div class="table-action-filters">
+                  <div class="filter-search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="allBooksFilterInput" placeholder="Filter by ID, Title, Author...">
+                  </div>
+
+                  <select id="allBooksStockFilter" class="filter-select-pill">
+                    <option value="all">All Statuses</option>
+                    <option value="available">Available Only</option>
+                    <option value="low">Low Stock</option>
+                    <option value="out">Out of Stock</option>
+                  </select>
+
+                  <button class="btn-purple-primary btn-sm-pill" onclick="window.navigateTo('add-book')">
+                    + Add Book
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="pro-table" id="allBooksTable">
+                  <thead>
+                    <tr>
+                      <th>Book ID</th>
+                      <th>Book Title</th>
+                      <th>Author</th>
+                      <th>Publication Year</th>
+                      <th>Available Copies</th>
+                      <th>Status</th>
+                      <th style="text-align: right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="allBooksTableBody">
+                    <!-- Populated dynamically via script.js -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="empty-state-view" id="allBooksEmptyState" style="display: none;">
+                <div class="empty-circle-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <h4>No Books Found</h4>
+                <p>No books match your current filter query. Try resetting your search or register a new book.</p>
+                <button class="btn-purple-primary" onclick="window.navigateTo('add-book')">Add New Book</button>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 4: SEARCH BOOKS (Task 3)                  -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-search-books">
+            <div class="section-card-panel">
+              <div class="search-hero-box">
+                <h2>Search Catalog Database</h2>
+                <p>Lookup any book by entering its <strong>Book ID</strong> or <strong>Book Title</strong>.</p>
+                
+                <div class="search-bar-unified">
+                  <div class="search-bar-inner">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="searchBookInput" placeholder="Enter Book ID (e.g. BK-101) or Title keyword...">
+                  </div>
+                  <button class="btn-purple-primary" id="btnExecuteSearch">Search</button>
+                  <button class="btn-outline-pill" id="btnClearSearch">Clear</button>
+                </div>
+
+                <div class="quick-tags-strip">
+                  <span>Quick Searches:</span>
+                  <button type="button" class="tag-chip" data-search="BK-101">BK-101</button>
+                  <button type="button" class="tag-chip" data-search="Clean Code">Clean Code</button>
+                  <button type="button" class="tag-chip" data-search="Algorithms">Algorithms</button>
+                  <button type="button" class="tag-chip" data-search="Kotlin">Kotlin</button>
+                </div>
+              </div>
+
+              <!-- Search Results Container -->
+              <div id="searchResultsSection" class="search-cards-grid">
+                <!-- Dynamically rendered search cards -->
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 5: ISSUE BOOKS (Task 4)                   -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-issue-book">
+            <div class="section-card-panel">
+              <div class="panel-header-bar">
+                <div>
+                  <h2 class="panel-title">Issue Book to Student</h2>
+                  <p class="panel-subtitle">Authorize student checkout, decrease stock count, and log the transaction</p>
+                </div>
+              </div>
+
+              <div class="form-two-column-layout">
+                <form id="issueBookForm" class="pro-styled-form" novalidate>
+                  <div class="form-group-item">
+                    <label for="issueBookIdInput" class="pro-label required">Book ID</label>
+                    <input type="text" id="issueBookIdInput" class="pro-input" placeholder="e.g. BK-101" list="availableBooksDatalist" required>
+                    <datalist id="availableBooksDatalist"></datalist>
+                    <span class="pro-hint">Enter registered Book ID or choose from catalog.</span>
+                  </div>
+
+                  <div class="form-group-item">
+                    <label for="issueStudentIdInput" class="pro-label required">Student ID</label>
+                    <input type="text" id="issueStudentIdInput" class="pro-input" placeholder="e.g. STU-2024-001" required>
+                    <span class="pro-hint">Unique institutional identifier of the student.</span>
+                  </div>
+
+                  <!-- Live Book Preview Widget -->
+                  <div class="live-preview-widget" id="issueBookPreviewBox" style="display: none;">
+                    <div class="preview-icon-square">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                    </div>
+                    <div class="preview-text-block">
+                      <h4 id="issuePreviewTitle">Book Title Preview</h4>
+                      <p id="issuePreviewAuthor">By Author</p>
+                      <div class="preview-status-pill-row">
+                        <span class="status-pill pill-approved" id="issuePreviewStatusBadge">Available</span>
+                        <span class="copies-count-text" id="issuePreviewStock">4 copies remaining</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-btn-actions">
+                    <button type="submit" class="btn-purple-primary" id="btnSubmitIssue">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                      Confirm & Issue Book
+                    </button>
+                    <button type="reset" class="btn-outline-pill">Clear</button>
+                  </div>
+                </form>
+
+                <div class="guidelines-card">
+                  <h3>Circulation Rules</h3>
+                  <div class="guide-step">
+                    <span class="step-num">1</span>
+                    <div>
+                      <strong>Availability Guard</strong>
+                      <p>At least 1 copy must be physically on the shelf (Available Copies &gt; 0).</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">2</span>
+                    <div>
+                      <strong>Stock Auto-Deduction</strong>
+                      <p>Available copies decrement by one immediately upon successful lending.</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">3</span>
+                    <div>
+                      <strong>Single Copy per Student</strong>
+                      <p>Prevents duplicate borrowing of the same title by the same student.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 6: RETURN BOOKS (Task 5)                  -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-return-book">
+            <div class="section-card-panel">
+              <div class="panel-header-bar">
+                <div>
+                  <h2 class="panel-title">Process Book Return</h2>
+                  <p class="panel-subtitle">Verify student borrowing records and restock available copies</p>
+                </div>
+              </div>
+
+              <div class="form-two-column-layout">
+                <form id="returnBookForm" class="pro-styled-form" novalidate>
+                  <div class="form-group-item">
+                    <label for="returnBookIdInput" class="pro-label required">Book ID</label>
+                    <input type="text" id="returnBookIdInput" class="pro-input" placeholder="e.g. BK-101" list="issuedBooksDatalist" required>
+                    <datalist id="issuedBooksDatalist"></datalist>
+                    <span class="pro-hint">ID of the book to be returned.</span>
+                  </div>
+
+                  <div class="form-group-item">
+                    <label for="returnStudentIdInput" class="pro-label required">Student ID</label>
+                    <input type="text" id="returnStudentIdInput" class="pro-input" placeholder="e.g. STU-2024-001" required>
+                    <span class="pro-hint">Student ID holding the active loan.</span>
+                  </div>
+
+                  <!-- Return Record Match Indicator -->
+                  <div class="live-preview-widget" id="returnMatchedRecordBox" style="display: none;">
+                    <div class="preview-icon-square success-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="preview-text-block">
+                      <h4 id="returnMatchedTitle">Active Issue Record Found</h4>
+                      <p id="returnMatchedDetails">Issued to Student on ...</p>
+                      <span class="status-pill pill-approved">Valid for Return</span>
+                    </div>
+                  </div>
+
+                  <div class="form-btn-actions">
+                    <button type="submit" class="btn-purple-primary" id="btnSubmitReturn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                      Process Return & Restock
+                    </button>
+                    <button type="reset" class="btn-outline-pill">Clear</button>
+                  </div>
+                </form>
+
+                <div class="guidelines-card">
+                  <h3>Return Protocol</h3>
+                  <div class="guide-step">
+                    <span class="step-num">1</span>
+                    <div>
+                      <strong>Mandatory Issue Record</strong>
+                      <p>Returns without an existing active loan record for that student are rejected.</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">2</span>
+                    <div>
+                      <strong>Automatic Restock</strong>
+                      <p>Available copies immediately increment by 1 and the transaction is marked 'Returned'.</p>
+                    </div>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-num">3</span>
+                    <div>
+                      <strong>One-Click Return</strong>
+                      <p>You can also process 1-click returns from the <strong>Book Issued/Return</strong> table.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================== -->
+          <!-- VIEW 7: CURRENTLY ISSUED BOOKS (Task 6)        -->
+          <!-- ============================================== -->
+          <section class="view-panel" id="view-issued-books">
+            <div class="section-card-panel">
+              <div class="panel-header-bar">
+                <div>
+                  <h2 class="panel-title">Currently Issued Books</h2>
+                  <p class="panel-subtitle">Active student book loans currently on loan and awaiting return</p>
+                </div>
+                
+                <div class="table-action-filters">
+                  <div class="filter-search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="issuedBooksFilterInput" placeholder="Filter by Book, Student ID...">
+                  </div>
+
+                  <button class="btn-purple-primary btn-sm-pill" onclick="window.navigateTo('issue-book')">
+                    Issue Another Book
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="pro-table" id="issuedBooksTable">
+                  <thead>
+                    <tr>
+                      <th>Txn ID</th>
+                      <th>Book ID</th>
+                      <th>Book Title</th>
+                      <th>Student ID</th>
+                      <th>Issue Date</th>
+                      <th>Issue Status</th>
+                      <th style="text-align: right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="issuedBooksTableBody">
+                    <!-- Populated dynamically via script.js -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="empty-state-view" id="issuedBooksEmptyState" style="display: none;">
+                <div class="empty-circle-icon success">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <h4>All Books Returned</h4>
+                <p>There are no outstanding student book loans at this time. All library inventory is safely on the shelves.</p>
+                <button class="btn-purple-primary" onclick="window.navigateTo('issue-book')">Issue a Book Now</button>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <button class="modal-close-cross" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body" id="modalMessage">
+        Are you sure you want to proceed?
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline-pill" id="modalCancelBtn">Cancel</button>
+        <button class="btn-purple-primary" id="modalConfirmBtn">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script src="./script.js"></script>
+</body>
+</html>
